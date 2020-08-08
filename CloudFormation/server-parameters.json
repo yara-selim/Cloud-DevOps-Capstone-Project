@@ -1,0 +1,16 @@
+[
+	{
+		"ParameterKey": "EnvironmentName",
+		"ParameterValue": "UdacityProject"
+	},
+
+	{
+		"ParameterKey": "PublicSubnet1",
+		"ParameterValue": "subnet-0f3b0a5ac15ed65b6"
+	},
+
+	{
+		"ParameterKey": "IAMRole",
+		"ParameterValue": "S3-Bucket-Admin-Role"
+	}	
+]
