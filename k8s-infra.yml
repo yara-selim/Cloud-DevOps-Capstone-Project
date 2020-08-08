@@ -57,13 +57,13 @@ Resources:
             sudo -i
             minikube start --vm-driver=none
             minikube status
-            git clone https://github.com/arya-hemanshu/CapstoneProject.git
+            git clone https://github.com/yara-selim/Cloud-DevOps-Capstone-Project.git
             cd CapstoneProject/
-            ./run_kubernetes.sh
+            ./run-k8s.sh
         ImageId: ami-06358f49b5839867c
         SecurityGroups:
         - Ref: WebServerSecGroup
-        InstanceType: t3.medium
+        InstanceType: t2.micro
         BlockDeviceMappings:
         - DeviceName: "/dev/sdk"
           Ebs:
