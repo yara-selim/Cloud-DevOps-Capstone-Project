@@ -21,6 +21,14 @@ pipeline {
                 sh './upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
             }
         }
+        stage('K8S Deploy')  {
+            steps {
+                withAWS(region:'us-west-2',credentials:'aws-static') {
+                    sh 'aws eks --region=us-west-2 update-kubeconfig --name Cloud-DevOps-Capstone-Cluster'
+                    sh 'kubectl apply -f k8s/capstone-deployment.yml'
+                }
+            }
+        }
 
     }
 }
