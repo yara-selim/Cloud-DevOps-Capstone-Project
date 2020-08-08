@@ -22,21 +22,7 @@ Parameters:
     WorkerInstanceType:
         Description: EC2 instance type for the worker node instances.
         Type: String
-        Default: t2.small
-
-    JenkingInstanceType:
-        Description: EC2 instance type for the jenkins instance.
-        Type: String
         Default: t2.micro
-
-    KeyName:
-        Description: EC2 KayPair Name
-        Type: String
-        Default: uc-capstone-keyname
-
-    SSHLocation:
-        Description: IP Address of Jenkins Administator machine
-        Type: String
 
 Resources:
     VPC:
@@ -173,8 +159,6 @@ Resources:
             NodeRole: !GetAtt WorkerRole.Arn
             InstanceTypes:
             -   !Ref WorkerInstanceType
-            RemoteAccess:
-                Ec2SshKey: !Ref KeyName
             Subnets:
             -   !Ref Subnet1
             -   !Ref Subnet2
