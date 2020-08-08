@@ -25,7 +25,7 @@ pipeline {
               steps {
                   withAWS(region:'us-west-2',credentials:'aws-static') {
                   
-                      aws s3 ls
+                     sh "aws s3 ls"
              }
          }
      }
