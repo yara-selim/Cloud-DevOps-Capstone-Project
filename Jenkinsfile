@@ -23,8 +23,9 @@
         }
         stage('Deploy') {
             steps {
-                sh "chmod +x create_infra.sh"
-                sh './create_infra.sh'
+                withAWS(region:'us-west-2',credentials:'aws-static') {
+                      aws cloudformation create-stack --stack-name ContainerHost --template-body file://capstone_infra.yml  --parameters file://capstone_infra_parameter.json --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2
+
             }
         }
 
