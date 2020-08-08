@@ -21,7 +21,14 @@ pipeline {
                 sh './upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
             }
         }
-
+        stage('Connect to AWS') {
+              steps {
+                  withAWS(region:'us-west-2',credentials:'aws-static') {
+                  
+                      s3 ls
+             }
+         }
+     }
 
     }
 }
