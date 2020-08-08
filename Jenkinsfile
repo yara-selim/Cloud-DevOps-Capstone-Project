@@ -24,7 +24,7 @@ pipeline {
         stage('K8S Deploy')  {
             steps {
                 withAWS(region:'us-west-2',credentials:'aws-static') {
-                    sh 'aws eks --region=us-west-2 update-kubeconfig --name Cloud-DevOps-Capstone-Cluster'
+                    sh 'aws eks --region=us-west-2 update-kubeconfig --name uc-capstone'
                     sh 'kubectl apply -f k8s/capstone-deployment.yml'
                 }
             }
