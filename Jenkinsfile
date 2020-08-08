@@ -11,12 +11,12 @@
         }
         stage('Build Docker Image') {
             steps {
-                sh './run_docker.sh'
+                sh 'sudo ./run_docker.sh'
             }
         }
         stage('Push to Docker Hub') {
             steps {
-                sh './upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
+                sh 'sudo ./upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
             }
         }
 
