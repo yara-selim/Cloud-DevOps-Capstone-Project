@@ -21,6 +21,10 @@ pipeline {
                 sh './upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
             }
         }
-
+        stage('Build Docker Container') {
+      		steps {
+			    sh 'docker run --name capstonecontainer -d -p 80:80 yaraselim1994/cloud-devops-capstone'
+            }
+        }
     }
 }
