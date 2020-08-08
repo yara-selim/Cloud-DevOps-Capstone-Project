@@ -1,4 +1,4 @@
-
+pipeline {
     environment {
         USER_CREDENTIALS = credentials('dockerhub')
     }
@@ -32,4 +32,4 @@
         }
 
     }
-
+}
