@@ -4,9 +4,10 @@ pipeline {
     }
     agent any
     stages {
-        stage('Lint HTML') {
+        stage('Lint HTML and Dockerfile') {
             steps {
                 sh 'tidy -q -e *.html'
+                sh 'hadolint Dockerfile'
             }
         }
         stage('Build Docker Image') {
@@ -21,14 +22,6 @@ pipeline {
                 sh './upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
             }
         }
-        stage('Connect to AWS') {
-              steps {
-                  withAWS(region:'us-west-2',credentials:'aws-static') {
-                  
-                     sh "aws cloudformation create-stack --stack-name ContainerHost --template-body file://capstone_infra.yml  --parameters file://capstone_infra_parameter.json"
-             }
-         }
-     }
 
     }
 }
