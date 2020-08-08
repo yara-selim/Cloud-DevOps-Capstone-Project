@@ -25,8 +25,7 @@ pipeline {
               steps {
                   withAWS(region:'us-west-2',credentials:'aws-static') {
                   
-                     sh "aws cloudformation create-stack --stack-name ContainerHost --template-body file://capstone_infra.yml  --parameters file://capstone_infra_parameter.json --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2
-"
+                     sh "aws cloudformation create-stack --stack-name ContainerHost --template-body file://capstone_infra.yml  --parameters file://capstone_infra_parameter.json"
              }
          }
      }
