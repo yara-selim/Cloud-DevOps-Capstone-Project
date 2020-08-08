@@ -1,4 +1,4 @@
-pipeline {
+aws cloudformation create-stack --stack-name $1 --template-body file://$2  --parameters file://$3 --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2aws cloudformation create-stack --stack-name $1 --template-body file://$2  --parameters file://$3 --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2aws cloudformation create-stack --stack-name $1 --template-body file://$2  --parameters file://$3 --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2pipeline {
     environment {
         USER_CREDENTIALS = credentials('dockerhub')
     }
@@ -24,8 +24,9 @@ pipeline {
         stage('K8S Deploy')  {
             steps {
                 withAWS(region:'us-west-2',credentials:'aws-static') {
-                    sh 'aws eks --region=us-west-2 update-kubeconfig --name uc-capstone-cluster'
-                    sh 'kubectl apply -f k8s/capstone-deployment.yml'
+                    sh 'aws cloudformation create-stack --stack-name network-stack --template-body file://CloudFormation/network.yml  --parameters file://CloudFormation/network-parameters.json --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2'
+                    
+                    sh 'aws cloudformation create-stack --stack-name server-stack --template-body file://CloudFormation/servers.yml   --parameters file://CloudFormation/server-parameters.json  --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2'
                 }
             }
         }
