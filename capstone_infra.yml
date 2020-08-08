@@ -2,6 +2,7 @@ Parameters:
   EnvironmentName:
         Description: An environment name that will be added to resource names
         Type: String
+        Default: Cloud-DevOps-Capstone-Project
 
 Resources:
   WebServerSecGroup:
