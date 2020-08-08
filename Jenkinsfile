@@ -23,6 +23,7 @@
         }
         stage('Deploy') {
             steps {
+                sh "chmod +x create_infra.sh"
                 sh './create_infra.sh'
             }
         }
