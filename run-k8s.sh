@@ -13,4 +13,4 @@ kubectl run capstone\
 kubectl get pods
 
 # Forward the container port to a host
-kubectl port-forward capstone 8000:80
+kubectl port-forward capstone 80:80
