@@ -15,7 +15,6 @@ pipeline {
                 sh './run_docker.sh'
             }
         stage('Aqua Microscanner') {
-            steps {
                 aquaMicroscanner imageName: 'capstone' , notCompliesCmd: 'exit1' , onDisallowed: 'fail'
       
             }
