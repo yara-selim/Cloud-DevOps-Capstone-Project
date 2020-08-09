@@ -18,7 +18,7 @@ pipeline {
         }
     stage('Aqua Microscanner') {
         steps{
-            aquaMicroscanner imageName: '', notCompliesCmd: '', onDisallowed: 'ignore' , outputFormat: 'html'
+            aquaMicroscanner imageName: 'capstone', notCompliesCmd: '', onDisallowed: 'ignore' , outputFormat: 'html'
          }
     }
         stage('Push to Docker Hub') {
