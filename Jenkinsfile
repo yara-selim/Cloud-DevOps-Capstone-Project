@@ -14,11 +14,11 @@ pipeline {
                 sh "chmod +x run_docker.sh"
                 sh './run_docker.sh'
             }
+        }
         stage('Aqua Microscanner') {
                 aquaMicroscanner imageName: 'capstone' , notCompliesCmd: 'exit1' , onDisallowed: 'fail'
       
             }
-        }
         stage('Push to Docker Hub') {
             steps {
                 sh "chmod +x upload_docker.sh"
