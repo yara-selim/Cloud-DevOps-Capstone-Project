@@ -14,6 +14,11 @@ pipeline {
                 sh "chmod +x run_docker.sh"
                 sh './run_docker.sh'
             }
+        stage('Aqua Microscanner') {
+            steps {
+                aquaMicroscanner imageName: 'capstone' , notCompliesCmd: 'exit1' , onDisallowed: 'fail'
+      
+            }
         }
         stage('Push to Docker Hub') {
             steps {
@@ -21,7 +26,7 @@ pipeline {
                 sh './upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
             }
         }
-        stage('K8S Deploy')  {
+        stage('K8S Infrastructure')  {
             steps {
                 withAWS(region:'us-west-2',credentials:'aws-static') {
                     
