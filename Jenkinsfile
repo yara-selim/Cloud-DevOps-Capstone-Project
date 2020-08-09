@@ -12,6 +12,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh "chmod +x run_docker.sh"
+                sh "chmod 777 /var/run/docker.sock"
                 sh './run_docker.sh'
             }
         }
