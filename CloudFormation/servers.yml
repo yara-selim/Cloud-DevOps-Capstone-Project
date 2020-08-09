@@ -1,5 +1,5 @@
 Description: >
-    Servers Stack 1
+    Servers Stack
 Parameters:
 
     EnvironmentName:
@@ -76,8 +76,8 @@ Resources:
           minikube status
           git clone https://github.com/yara-selim/Cloud-DevOps-Capstone-Project.git
           cd CapstoneProject/
-          ./run-k8s.sh
-      ImageId: ami-06358f49b5839867c
+          ./run-k8s.sh  
+      ImageId: ami-067f5c3d5a99edc80
       SecurityGroups:
       - Ref: WebServerSecGroup
       InstanceType: t2.micro
@@ -141,13 +141,17 @@ Resources:
       VpcId: 
         Fn::ImportValue:
           Fn::Sub: "${EnvironmentName}-VPCID"
+Outputs: 
+  WebAppLB: 
+    Description: A reference to the Load Balancer DNS Name
+    Value: !GetAtt WebAppLB.DNSName
+    Export:
+      Name: !Sub ${EnvironmentName}-LB-DNS
+        
+      
 
 
 
-
-
-
-    
 
 
     
