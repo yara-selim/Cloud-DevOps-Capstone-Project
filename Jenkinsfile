@@ -9,13 +9,7 @@ pipeline {
                 sh 'tidy -q -e *.html'
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                sh "chmod +x run_docker.sh"
-                sh "chmod 777 /var/run/docker.sock"
-                sh './run_docker.sh'
-            }
-        }
+
     stage('Aqua Microscanner') {
         steps{
             aquaMicroscanner imageName: 'capstone', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
