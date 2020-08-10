@@ -1,5 +1,4 @@
 #!/bin/bash
-minikube start
 kubectl run capstone\
 --image=yaraselim1994/cloud-devops-capstone\
 --port=80
