@@ -53,19 +53,12 @@ Resources:
           sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
           && chmod +x minikube
           sudo cp minikube /usr/local/bin
-          cd /home/ec2-user/
-          git clone https://github.com/yara-selim/Cloud-DevOps-Capstone-Project.git
-          cd Cloud-DevOps-Capstone-Project/
-          sudo chmod +x script1.sh
-          sudo chmod +x script2.sh
-          ./script1.sh
-          ./script2.sh
-          #sudo chmod 666 /var/run/docker.sock
-          #minikube start
-          #kubectl run capstone\
-          #--image=yaraselim1994/cloud-devops-capstone\
-          #--port=80
-          #kubectl port-forward --address 0.0.0.0 capstone 8888:80
+          sudo chmod 666 /var/run/docker.sock
+          minikube start
+          kubectl run capstone\
+          --image=yaraselim1994/cloud-devops-capstone\
+          --port=80
+          kubectl port-forward --address 0.0.0.0 capstone 8888:80
       ImageId: ami-067f5c3d5a99edc80
       InstanceType: t3.medium
       KeyName: jumpbox
