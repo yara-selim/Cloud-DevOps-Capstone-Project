@@ -1,0 +1,74 @@
+Description: >
+    EC2 Stack
+Parameters:
+    EnvironmentName:
+        Description: An environment name that will be prefixed to resource names
+        Type: String
+        Default: CapstoneProject
+Resources:
+  SecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: EC2 Security Group
+      VpcId: vpc-30a7d648
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 8888
+        ToPort: 8888
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+      - IpProtocol: -1
+        FromPort: 0
+        ToPort: 65535
+        CidrIp: 0.0.0.0/0
+  EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo yum -y update
+          sudo yum -y install git
+          sudo yum -y install docker
+          sudo service docker start
+          sudo docker pull yaraselim1994/cloud-devops-capstone
+          sudo cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+          enabled=1
+          gpgcheck=1
+          repo_gpgcheck=1
+          gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+          EOF
+          sudo yum install -y kubectl
+          sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+          && chmod +x minikube
+          sudo cp minikube /usr/local/bin
+          sudo chmod 666 /var/run/docker.sock
+          minikube start
+          kubectl run capstone\
+          --image=yaraselim1994/cloud-devops-capstone\
+          --port=80
+          kubectl port-forward --address 0.0.0.0 capstone 8888:80
+      ImageId: ami-067f5c3d5a99edc80
+      InstanceType: t3.medium
+      KeyName: jumpbox
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+          - Ref: SecGroup
+          SubnetId: subnet-061c482d
+      BlockDeviceMappings:
+      - DeviceName: "/dev/sdk"
+        Ebs:
+          VolumeSize: '10'
