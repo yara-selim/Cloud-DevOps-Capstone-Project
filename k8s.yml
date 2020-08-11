@@ -39,9 +39,6 @@ Resources:
           sudo yum -y install git
           sudo yum -y install docker
           sudo service docker start
-          touch /home/ec2-user/test.txt
-          git clone https://github.com/yara-selim/Cloud-DevOps-Capstone-Project.git:whatever /home/ec2-user/
-          sudo chmod +x /home/ec2-user/Cloud-DevOps-Capstone-Project/k8s.sh
           sudo docker pull yaraselim1994/cloud-devops-capstone
           sudo cat <<EOF > /etc/yum.repos.d/kubernetes.repo
           [kubernetes]
