@@ -34,12 +34,12 @@ pipeline {
             }
         }
 
-                stage('K8S Infrastructure')  {
+                stage('K8S')  {
             steps {
-                withAWS(region:'us-west-2',credentials:'aws-static') {
-                   
-                    sh 'aws cloudformation create-stack --stack-name k8s-stack$(uuidgen) --template-body file://k8s.yml   --parameters file://k8s-parameters.json  --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2'
-                }
+                sshagent(credentials : ['K8S-EC2']) {
+  
+  sh 'ssh -t -t ec2-user@44.234.42.32 -o StrictHostKeyChecking=no "touch /home/ec2-user/test2.txt"'
+}
             }
         }
     }
