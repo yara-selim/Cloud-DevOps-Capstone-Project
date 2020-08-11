@@ -39,6 +39,7 @@ Resources:
           sudo yum -y install git
           sudo yum -y install docker
           sudo service docker start
+          touch test.txt
           sudo docker pull yaraselim1994/cloud-devops-capstone
           sudo cat <<EOF > /etc/yum.repos.d/kubernetes.repo
           [kubernetes]
