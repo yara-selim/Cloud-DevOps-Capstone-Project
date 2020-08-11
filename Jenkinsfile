@@ -36,7 +36,7 @@ pipeline {
 
                 stage('K8S')  {
             steps {
-                sshagent(credentials : ['K8S-EC2']) {
+                sshagent(credentials : ['k8s']) {
   
   sh 'ssh -t -t ec2-user@44.234.42.32 -o StrictHostKeyChecking=no "touch /home/ec2-user/test2.txt"'
 }
