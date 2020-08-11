@@ -12,7 +12,7 @@ pipeline {
    
         stage('Lint Dockerfile') {
             steps {
-                sh 'hadolint --disable=DL3006 Dockerfile'
+                sh 'hadolint --ignore DL3006 Dockerfile'
             }
         }
         
