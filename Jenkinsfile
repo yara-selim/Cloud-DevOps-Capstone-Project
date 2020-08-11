@@ -38,7 +38,7 @@ pipeline {
             steps {
                 sshagent(credentials : ['k8s']) {
   
-  sh 'ssh -t -t ec2-user@44.234.42.32 -o StrictHostKeyChecking=no "minikube start && ./home/ec2-user/Cloud-DevOps-Capstone-Project/k8s.sh"'
+  sh 'ssh -t -t ec2-user@44.234.58.227 -o StrictHostKeyChecking=no "minikube start && ./home/ec2-user/Cloud-DevOps-Capstone-Project/k8s.sh"'
 }
             }
         }
