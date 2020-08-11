@@ -38,7 +38,7 @@ pipeline {
             steps {
                 withAWS(region:'us-west-2',credentials:'aws-static') {
                    
-                    sh 'aws cloudformation create-stack --stack-name k8s-stack --template-body file://k8s.yml   --parameters file://k8s-parameters.json  --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2'
+                    sh 'aws cloudformation update-stack --stack-name k8s-stack --template-body file://k8s.yml   --parameters file://k8s-parameters.json  --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2'
                 }
             }
         }
