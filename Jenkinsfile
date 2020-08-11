@@ -9,7 +9,15 @@ pipeline {
                 sh 'tidy -q -e *.html'
             }
         }
-            
+    
+    stages {
+        stage('Lint Dockerfile') {
+            steps {
+                sh 'sudo su root'
+                sh 'hadolint Dockerfile'
+            }
+        }
+        
     stage('Build Docker Image') {
             steps {
                 sh "chmod +x run_docker.sh"
