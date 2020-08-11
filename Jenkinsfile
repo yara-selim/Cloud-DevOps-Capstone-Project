@@ -38,7 +38,7 @@ pipeline {
             steps {
                 sshagent(credentials : ['k8s']) {
   
-  sh 'ssh -t -t ec2-user@44.234.42.32 -o StrictHostKeyChecking=no "touch /home/ec2-user/test2.txt"'
+  sh 'ssh -t -t ec2-user@44.234.42.32 -o StrictHostKeyChecking=no "minikube start && kubectl run capstone --image=yaraselim1994/cloud-devops-capstone --port=80 && kubectl get pods && kubectl port-forward --address 0.0.0.0 capstone 8888:80"'
 }
             }
         }
