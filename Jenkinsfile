@@ -12,7 +12,6 @@ pipeline {
    
         stage('Lint Dockerfile') {
             steps {
-                sh 'sudo su root'
                 sh 'hadolint Dockerfile'
             }
         }
