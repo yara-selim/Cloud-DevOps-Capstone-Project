@@ -9,8 +9,7 @@ pipeline {
                 sh 'tidy -q -e *.html'
             }
         }
-    
-    stages {
+   
         stage('Lint Dockerfile') {
             steps {
                 sh 'sudo su root'
